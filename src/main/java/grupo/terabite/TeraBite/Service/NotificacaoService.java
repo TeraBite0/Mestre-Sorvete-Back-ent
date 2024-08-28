@@ -29,6 +29,7 @@ public class NotificacaoService {
 
     public Notificacao atualizarNotificacao(Integer id, Notificacao notificacao){
         if(notificacaoRepository.existsById(id)){
+            notificacao.setId(id);
             return notificacaoRepository.save(notificacao);
         } else {return null;}
     }
@@ -36,7 +37,7 @@ public class NotificacaoService {
     public Boolean deletarNotificacao(Integer id){
         if(notificacaoRepository.existsById(id)){
             notificacaoRepository.deleteById(id);
-            return !notificacaoRepository.existsById(id);
-        } else {return false;}
+        }
+        return !notificacaoRepository.existsById(id);
     }
 }

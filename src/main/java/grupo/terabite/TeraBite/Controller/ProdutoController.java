@@ -39,7 +39,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletarProduto(@PathVariable Integer id) {
-        service.deletarProduto(id);
+    public String deletarProduto(@PathVariable Integer id) {
+        return service.deletarProduto(id) ? "Produto deletado com sucesso" : "Produto não encontrado / Erro ao deletar produto";
     }
 }
