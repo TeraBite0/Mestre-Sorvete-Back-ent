@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Sorvete {
+public class Produto {
 
     @Id // esse atributo "@Id" será o nosso identificador da tabela
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
@@ -15,9 +15,9 @@ public class Sorvete {
     private Double preco;
     private Integer qtdEstoque;
 
-    public Sorvete(){}
+    public Produto(){}
 
-    public Sorvete(Integer id, String sabor, Double preco, Integer qtdEstoque) {
+    public Produto(Integer id, String sabor, Double preco, Integer qtdEstoque) {
         this.id = id;
         this.sabor = sabor;
         this.preco = preco;
