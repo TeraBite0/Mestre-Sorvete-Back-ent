@@ -1,22 +1,20 @@
-package grupo.terabite.TeraBite.Entity;
+package grupo.terabite.terabite.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 public class Lote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Date dtPedido;
-    private LocalDateTime dtEntrega;
+    private LocalDate dtPedido;
+    private LocalDate dtEntrega;
+    @ManyToOne
     private Produto produto;
-    private Date dtVencimento;
+    private LocalDate dtVencimento;
 
     private Integer qtdProdutosComprados;
     private Double valorLote;
@@ -32,19 +30,19 @@ public class Lote {
         this.id = id;
     }
 
-    public Date getDtPedido() {
+    public LocalDate getDtPedido() {
         return dtPedido;
     }
 
-    public void setDtPedido(Date dtPedido) {
+    public void setDtPedido(LocalDate dtPedido) {
         this.dtPedido = dtPedido;
     }
 
-    public LocalDateTime getDtEntrega() {
+    public LocalDate getDtEntrega() {
         return dtEntrega;
     }
 
-    public void setDtEntrega(LocalDateTime dtEntrega) {
+    public void setDtEntrega(LocalDate dtEntrega) {
         this.dtEntrega = dtEntrega;
     }
 
@@ -56,11 +54,11 @@ public class Lote {
         this.produto = produto;
     }
 
-    public Date getDtVencimento() {
+    public LocalDate getDtVencimento() {
         return dtVencimento;
     }
 
-    public void setDtVencimento(Date dtVencimento) {
+    public void setDtVencimento(LocalDate dtVencimento) {
         this.dtVencimento = dtVencimento;
     }
 

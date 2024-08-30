@@ -1,4 +1,4 @@
-package grupo.terabite.TeraBite;
+package grupo.terabite.terabite;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

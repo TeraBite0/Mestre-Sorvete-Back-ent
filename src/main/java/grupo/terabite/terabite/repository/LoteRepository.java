@@ -1,6 +1,6 @@
-package grupo.terabite.TeraBite.Repository;
+package grupo.terabite.terabite.repository;
 
-import grupo.terabite.TeraBite.Entity.Lote;
+import grupo.terabite.terabite.entity.Lote;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LoteRepository extends JpaRepository<Lote, Integer> {

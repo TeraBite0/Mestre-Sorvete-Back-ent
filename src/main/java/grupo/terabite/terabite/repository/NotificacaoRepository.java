@@ -1,6 +1,6 @@
-package grupo.terabite.TeraBite.Repository;
+package grupo.terabite.terabite.repository;
 
-import grupo.terabite.TeraBite.Entity.Notificacao;
+import grupo.terabite.terabite.entity.Notificacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NotificacaoRepository extends JpaRepository<Notificacao,Integer> {

@@ -1,6 +1,6 @@
-package grupo.terabite.TeraBite.Repository;
+package grupo.terabite.terabite.repository;
 
-import grupo.terabite.TeraBite.Entity.Produto;
+import grupo.terabite.terabite.entity.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {

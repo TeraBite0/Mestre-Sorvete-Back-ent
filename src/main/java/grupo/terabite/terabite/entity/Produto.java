@@ -1,4 +1,4 @@
-package grupo.terabite.TeraBite.Entity;
+package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,8 +8,8 @@ import jakarta.persistence.Id;
 @Entity
 public class Produto {
 
-    @Id // esse atributo "@Id" será o nosso identificador da tabela
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String sabor;
     private Double preco;
