@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 @RestController
 @RequestMapping("/lotes")
@@ -18,6 +20,48 @@ public class LoteController {
     @GetMapping
     public ResponseEntity<List<Lote>> listarLote(){
         return service.listarLote();
+    }
+
+    @GetMapping("/ordenados")
+    public ResponseEntity<List<Lote>> listarLoteOrdenado(@RequestParam(defaultValue = "dtVencimento") String ordenarPor) {
+        ResponseEntity<List<Lote>> response = service.listarLote();
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            List<Lote> lotes = new ArrayList<>(response.getBody());
+            insertionSort(lotes, getComparator(ordenarPor));
+            return ResponseEntity.ok(lotes);
+        }
+        return response;
+    }
+
+    private void insertionSort(List<Lote> lotes, Comparator<Lote> comparator) {
+        int n = lotes.size();
+        for (int i = 1; i < n; ++i) {
+            Lote key = lotes.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && comparator.compare(lotes.get(j), key) > 0) {
+                lotes.set(j + 1, lotes.get(j));
+                j = j - 1;
+            }
+            lotes.set(j + 1, key);
+        }
+    }
+
+    private Comparator<Lote> getComparator(String ordenarPor) {
+        switch (ordenarPor.toLowerCase()) {
+            case "dtvencimento":
+                return Comparator.comparing(Lote::getDtVencimento);
+            case "valorlote":
+                return Comparator.comparing(Lote::getValorLote);
+            case "dtpedido":
+                return Comparator.comparing(Lote::getDtPedido);
+            case "dtentrega":
+                return Comparator.comparing(Lote::getDtEntrega);
+            case "qtdprodutoscomprados":
+                return Comparator.comparing(Lote::getQtdProdutosComprados);
+            default:
+                return Comparator.comparing(Lote::getDtVencimento);
+        }
     }
 
     @GetMapping("/{id}")
