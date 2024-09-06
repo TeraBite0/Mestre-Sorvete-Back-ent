@@ -17,15 +17,15 @@ public class NotificacaoService {
 
     public ResponseEntity<List<Notificacao>> listarNotificacoes() {
         List<Notificacao> notificacoes = notificacaoRepository.findAll();
-        if(notificacoes.isEmpty()){
+        if (notificacoes.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
         return ResponseEntity.status(200).body(notificacoes);
     }
 
-    public ResponseEntity<Notificacao> buscarPorId( Integer id) {
+    public ResponseEntity<Notificacao> buscarPorId(Integer id) {
         Optional<Notificacao> notificacao = notificacaoRepository.findById(id);
-        if(notificacao.isEmpty()){
+        if (notificacao.isEmpty()) {
             return ResponseEntity.status(204).build();
         }
         return ResponseEntity.status(200).body(notificacao.orElse(null));
@@ -36,16 +36,16 @@ public class NotificacaoService {
         return ResponseEntity.status(201).body(notificacaoRepository.save(novaNotificacao));
     }
 
-    public ResponseEntity<Notificacao> atualizarNotificacao(Integer id, Notificacao notificacao){
-        if(!notificacaoRepository.existsById(id)){
+    public ResponseEntity<Notificacao> atualizarNotificacao(Integer id, Notificacao notificacao) {
+        if (!notificacaoRepository.existsById(id)) {
             return ResponseEntity.status(404).build();
         }
         notificacao.setId(id);
         return ResponseEntity.status(200).body(notificacaoRepository.save(notificacao));
     }
 
-    public ResponseEntity<Void> deletarNotificacao(Integer id){
-        if(notificacaoRepository.existsById(id)){
+    public ResponseEntity<Void> deletarNotificacao(Integer id) {
+        if (notificacaoRepository.existsById(id)) {
             notificacaoRepository.deleteById(id);
             return ResponseEntity.status(204).build();
         }

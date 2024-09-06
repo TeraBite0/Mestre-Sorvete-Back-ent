@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-
 @Entity
 public class Lote {
     @Id
@@ -12,12 +11,11 @@ public class Lote {
     private Integer id;
     private LocalDate dtPedido;
     private LocalDate dtEntrega;
-    @ManyToOne
-    private Produto produto;
     private LocalDate dtVencimento;
-
     private Integer qtdProdutosComprados;
     private Double valorLote;
+    @ManyToOne
+    private Produto produto;
 
     public Lote() {
     }

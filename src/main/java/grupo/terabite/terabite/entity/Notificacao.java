@@ -22,7 +22,8 @@ public class Notificacao {
 //        this.produto = produto;
     }
 
-    public Notificacao() {}
+    public Notificacao() {
+    }
 
     public Integer getId() {
         return id;

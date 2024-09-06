@@ -15,7 +15,7 @@ public class NotificacaoController {
     private NotificacaoService service;
 
     @GetMapping
-    public ResponseEntity<List<Notificacao>> listarNotificacoes(){
+    public ResponseEntity<List<Notificacao>> listarNotificacoes() {
         return service.listarNotificacoes();
     }
 
@@ -25,18 +25,18 @@ public class NotificacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Notificacao> adicionarNotificacao(@RequestBody Notificacao novaNotificacao){
+    public ResponseEntity<Notificacao> adicionarNotificacao(@RequestBody Notificacao novaNotificacao) {
         return service.adicionarNotificacao(novaNotificacao);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Notificacao> atualizarNotificacao(@PathVariable Integer id ,@RequestBody Notificacao notificacaoAtualizada){
+    public ResponseEntity<Notificacao> atualizarNotificacao(@PathVariable Integer id, @RequestBody Notificacao notificacaoAtualizada) {
         return service.atualizarNotificacao(id, notificacaoAtualizada);
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarNotificacao(@PathVariable Integer id){
+    public ResponseEntity<Void> deletarNotificacao(@PathVariable Integer id) {
         return service.deletarNotificacao(id);
     }
 }

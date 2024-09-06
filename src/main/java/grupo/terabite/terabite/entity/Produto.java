@@ -1,5 +1,6 @@
 package grupo.terabite.terabite.entity;
 
+import grupo.terabite.terabite.enums.ProdutoEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,14 +12,19 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private ProdutoEnum item;
+    private String marca;
     private String sabor;
     private Double preco;
     private Integer qtdEstoque;
 
-    public Produto(){}
+    public Produto() {
+    }
 
-    public Produto(Integer id, String sabor, Double preco, Integer qtdEstoque) {
+    public Produto(Integer id, ProdutoEnum item, String marca, String sabor, Double preco, Integer qtdEstoque) {
         this.id = id;
+        this.item = item;
+        this.marca = marca;
         this.sabor = sabor;
         this.preco = preco;
         this.qtdEstoque = qtdEstoque;
@@ -30,6 +36,22 @@ public class Produto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public ProdutoEnum getItem() {
+        return item;
+    }
+
+    public void setItem(ProdutoEnum item) {
+        this.item = item;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getSabor() {

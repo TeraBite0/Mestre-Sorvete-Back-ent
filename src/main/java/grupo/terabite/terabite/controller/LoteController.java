@@ -18,7 +18,7 @@ public class LoteController {
     LoteService service;
 
     @GetMapping
-    public ResponseEntity<List<Lote>> listarLote(){
+    public ResponseEntity<List<Lote>> listarLote() {
         return service.listarLote();
     }
 
@@ -65,22 +65,22 @@ public class LoteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Lote> buscarPorId(@PathVariable Integer id){
+    public ResponseEntity<Lote> buscarPorId(@PathVariable Integer id) {
         return service.buscarPorId(id);
     }
 
     @PostMapping
-    public ResponseEntity<Lote> adicionarLote(@RequestBody Lote novoLote){
+    public ResponseEntity<Lote> adicionarLote(@RequestBody Lote novoLote) {
         return service.adicionarLote(novoLote);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Lote> atualizarLote(@PathVariable Integer id, @RequestBody Lote loteAtualizado){
+    public ResponseEntity<Lote> atualizarLote(@PathVariable Integer id, @RequestBody Lote loteAtualizado) {
         return service.atualizarLote(id, loteAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarLote(@PathVariable Integer id){
+    public ResponseEntity<Void> deletarLote(@PathVariable Integer id) {
         return service.deletarLote(id);
     }
 }
