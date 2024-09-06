@@ -1,22 +1,37 @@
 package grupo.terabite.terabite.service;
 
+import grupo.terabite.terabite.dto.externo.ForecastExternoDto;
 import grupo.terabite.terabite.dto.externo.HgExternoDto;
+import grupo.terabite.terabite.dto.externo.WeatherResultsExternoDto;
+import grupo.terabite.terabite.generico.IOrdenadorGenerico;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class HgApiService {
+public class HgApiService implements IOrdenadorGenerico{
 
-    @Value("${hgbrasil.api.key}")
-    private String apiKey;
-
-    private static final String HG_API_URL = "https://api.hgbrasil.com/weather?key=9c8d7cf9&city_name=São+Paulo,SP";
-    HgExternoDto HgApiExternaDto;
-
-    public HgExternoDto getWeather() {
+    public Optional<HgExternoDto> buscarCidade() {
         RestTemplate restTemplate = new RestTemplate();
-        String url = String.format(HG_API_URL, apiKey);
-        return restTemplate.getForObject(url, HgExternoDto.class);
+        String url = String.format("https://api.hgbrasil.com/weather?key=9c8d7cf9&city_name=São+Paulo,SP", "${hgbrasil.api.key}");
+        HgExternoDto list = restTemplate.getForObject(url, HgExternoDto.class);
+        return Optional.ofNullable(list);
+    }
+
+    public Optional<WeatherResultsExternoDto> buscarClima(){
+        return buscarCidade().map(HgExternoDto::getResults);
+    }
+
+    public Optional<List<ForecastExternoDto>> buscarPrevisao(){
+        return buscarClima().map(WeatherResultsExternoDto::getForecast);
+    }
+
+    @Override
+    public Optional<List> ordenarMaximo(List items) {
+        return Optional.empty();
     }
 }

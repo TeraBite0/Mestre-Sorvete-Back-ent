@@ -1,33 +1,50 @@
 package grupo.terabite.terabite.entity;
 
 import grupo.terabite.terabite.enums.ProdutoEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import grupo.terabite.terabite.enums.SimNaoEnum;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "PRODUTO")
+//schema = "TRB",
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "ID_PROD")
     private Integer id;
+
+    @Column(name = "ITEM_PROD")
     private ProdutoEnum item;
+
+    @Column(name = "MARCA_PROD")
     private String marca;
+
+    @Column(name = "SABOR_PROD")
     private String sabor;
+
+    @Column(name = "PRECO_PROD")
     private Double preco;
+
+    @Column(name = "QAT_ESTOQUE_PROD")
     private Integer qtdEstoque;
+
+    @Column(name = "IS_ATIVO")
+    @Enumerated(EnumType.STRING)
+    private SimNaoEnum isAtivo = SimNaoEnum.S;
 
     public Produto() {
     }
 
-    public Produto(Integer id, ProdutoEnum item, String marca, String sabor, Double preco, Integer qtdEstoque) {
+    public Produto(Integer id, ProdutoEnum item, String marca, String sabor, Double preco, Integer qtdEstoque, SimNaoEnum isAtivo) {
         this.id = id;
         this.item = item;
         this.marca = marca;
         this.sabor = sabor;
         this.preco = preco;
         this.qtdEstoque = qtdEstoque;
+        this.isAtivo = isAtivo;
     }
 
     public Integer getId() {
@@ -76,5 +93,13 @@ public class Produto {
 
     public void setQtdEstoque(Integer qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
+    }
+
+    public SimNaoEnum getIsAtivo() {
+        return isAtivo;
+    }
+
+    public void setIsAtivo(SimNaoEnum isAtivo) {
+        this.isAtivo = isAtivo;
     }
 }

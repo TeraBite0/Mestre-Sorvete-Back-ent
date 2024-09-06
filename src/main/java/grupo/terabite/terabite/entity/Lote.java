@@ -5,16 +5,31 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "LOTE")
 public class Lote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "ID_LOTE")
     private Integer id;
+
+    @Column(name = "DATA_PEDIDO_LOTE")
     private LocalDate dtPedido;
+
+    @Column(name = "DATA_ENTREGA_LOTE")
     private LocalDate dtEntrega;
+
+    @Column(name = "DATA_VENCIMENTO_LOTE")
     private LocalDate dtVencimento;
-    private Integer qtdProdutosComprados;
+
+    @Column(name = "QTD_PRODUTO_COMPRADO_LOTE")
+    private Integer qtdProdutoComprado;
+
+    @Column(name = "VALOR_LOTE")
     private Double valorLote;
+
     @ManyToOne
+    @JoinColumn(name = "FK_ID_PROD_LOTE", referencedColumnName = "ID_PROD")
     private Produto produto;
 
     public Lote() {
@@ -60,12 +75,12 @@ public class Lote {
         this.dtVencimento = dtVencimento;
     }
 
-    public Integer getQtdProdutosComprados() {
-        return qtdProdutosComprados;
+    public Integer getQtdProdutoComprado() {
+        return qtdProdutoComprado;
     }
 
-    public void setQtdProdutosComprados(Integer qtdProdutosComprados) {
-        this.qtdProdutosComprados = qtdProdutosComprados;
+    public void setQtdProdutoComprado(Integer qtdProdutoComprado) {
+        this.qtdProdutoComprado = qtdProdutoComprado;
     }
 
     public Double getValorLote() {

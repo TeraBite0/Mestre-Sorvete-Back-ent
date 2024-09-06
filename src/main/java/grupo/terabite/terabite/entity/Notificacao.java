@@ -1,25 +1,28 @@
 package grupo.terabite.terabite.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "NOTIFICACAO")
 public class Notificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "ID_NOTI")
     private Integer id;
 
+    @Column(name = "EMAIL_NOTI")
     private String email;
 
-//    private Produto produto;
+    @ManyToOne
+    @JoinColumn(name = "FK_ID_PROD_NOTI", referencedColumnName = "ID_PROD")
+    private Produto produto;
 
-    public Notificacao(Integer id, String email) {
+    public Notificacao(Integer id, String email, Produto produto) {
         this.id = id;
         this.email = email;
-//        this.produto = produto;
+        this.produto = produto;
     }
 
     public Notificacao() {
@@ -41,11 +44,11 @@ public class Notificacao {
         this.email = email;
     }
 
-//    public Produto getProduto() {
-//        return produto;
-//    }
-//
-//    public void setProduto(Produto produto) {
-//        this.produto = produto;
-//    }
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
 }

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lotes")
@@ -58,7 +58,7 @@ public class LoteController {
             case "dtentrega":
                 return Comparator.comparing(Lote::getDtEntrega);
             case "qtdprodutoscomprados":
-                return Comparator.comparing(Lote::getQtdProdutosComprados);
+                return Comparator.comparing(Lote::getQtdProdutoComprado);
             default:
                 return Comparator.comparing(Lote::getDtVencimento);
         }
