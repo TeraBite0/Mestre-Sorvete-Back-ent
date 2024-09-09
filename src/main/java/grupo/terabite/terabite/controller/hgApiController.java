@@ -33,4 +33,9 @@ public class hgApiController {
     public Optional<List<ForecastExternoDto>> buscarPrevisao() {
         return weatherService.buscarPrevisao();
     }
+
+    @GetMapping("/buscar-previsoes-ordenado-max")
+    public List buscarPrevisaoOrdenadoMax() {
+        return weatherService.ordenarMaximo();
+    }
 }

@@ -31,7 +31,17 @@ public class HgApiService implements IOrdenadorGenerico{
     }
 
     @Override
-    public Optional<List> ordenarMaximo(List items) {
-        return Optional.empty();
+    public List ordenarMaximo() {
+        List<ForecastExternoDto> list = buscarPrevisao().get();
+        for (int i = 1; i < list.size(); ++i) {
+            ForecastExternoDto key = list.get(i);
+            int j = i - 1;
+            while (j >= 0 && (list.get(j).getMax() < key.getMax())) {
+                list.set(j + 1, list.get(j));
+                j = j - 1;
+            }
+            list.set(j + 1, key);
+        }
+        return list;
     }
 }
