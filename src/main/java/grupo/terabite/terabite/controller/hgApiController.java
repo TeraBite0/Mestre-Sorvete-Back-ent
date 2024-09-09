@@ -25,12 +25,17 @@ public class hgApiController {
     }
 
     @GetMapping("/buscar-climas")
-    public Optional<WeatherResultsExternoDto> buscarWather() {
+    public Optional<WeatherResultsExternoDto> buscarClimas() {
         return weatherService.buscarClima();
     }
 
     @GetMapping("/buscar-previsoes")
     public Optional<List<ForecastExternoDto>> buscarPrevisao() {
         return weatherService.buscarPrevisao();
+    }
+
+    @GetMapping("/buscar-previsoes-ordenado-max")
+    public List buscarPrevisaoOrdenadoMax() {
+        return weatherService.ordenarMaximo();
     }
 }
