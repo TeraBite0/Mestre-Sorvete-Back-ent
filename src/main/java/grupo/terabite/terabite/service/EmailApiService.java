@@ -7,12 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.Properties;
+import java.util.Scanner;
 import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EmailApiService {
-    final String username = "";
-    final String password = "";
+    final String username = System.getenv("EMAIL_BENEFICIARIO");
+    final String password = System.getenv("SENHA_APP_EMAIL");
     final Properties props;
 
     final Session session;
@@ -109,9 +110,14 @@ public class EmailApiService {
         return message;
     }
 
-    // RODAR PARA TESTAR, COLOQUE SEU EMAIL
+
     public static void main(String[] args) {
         String seuEmail = "";
+        if(seuEmail.equals("")){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Digite o email do destinatário:");
+            seuEmail = sc.nextLine();
+        }
 
         EmailApiService service = new EmailApiService();
         String body = "<br>Teste<br><br>Teste de email concluido com sucesso.<br>";
