@@ -3,8 +3,9 @@ package grupo.terabite.terabite.service;
 import grupo.terabite.terabite.entity.Notificacao;
 import grupo.terabite.terabite.repository.NotificacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,40 +16,39 @@ public class NotificacaoService {
     @Autowired
     private NotificacaoRepository notificacaoRepository;
 
-    public ResponseEntity<List<Notificacao>> listarNotificacoes() {
+    public List<Notificacao> listarNotificacoes() {
         List<Notificacao> notificacoes = notificacaoRepository.findAll();
         if (notificacoes.isEmpty()) {
-            return ResponseEntity.status(204).build();
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(notificacoes);
+        return notificacoes;
     }
 
-    public ResponseEntity<Notificacao> buscarPorId(Integer id) {
-        Optional<Notificacao> notificacao = notificacaoRepository.findById(id);
-        if (notificacao.isEmpty()) {
-            return ResponseEntity.status(204).build();
+    public Notificacao buscarPorId(Integer id) {
+        Optional<Notificacao> notificacoesOpt = notificacaoRepository.findById(id);
+        if (notificacoesOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(notificacao.orElse(null));
+        return notificacoesOpt.get();
     }
 
-    public ResponseEntity<Notificacao> adicionarNotificacao(Notificacao novaNotificacao) {
+    public Notificacao criarNotificacao(Notificacao novaNotificacao) {
         novaNotificacao.setId(null);
-        return ResponseEntity.status(201).body(notificacaoRepository.save(novaNotificacao));
+        return notificacaoRepository.save(novaNotificacao);
     }
 
-    public ResponseEntity<Notificacao> atualizarNotificacao(Integer id, Notificacao notificacao) {
+    public Notificacao atualizarNotificacao(Integer id, Notificacao notificacao) {
         if (!notificacaoRepository.existsById(id)) {
-            return ResponseEntity.status(404).build();
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
         notificacao.setId(id);
-        return ResponseEntity.status(200).body(notificacaoRepository.save(notificacao));
+        return notificacaoRepository.save(notificacao);
     }
 
-    public ResponseEntity<Void> deletarNotificacao(Integer id) {
-        if (notificacaoRepository.existsById(id)) {
-            notificacaoRepository.deleteById(id);
-            return ResponseEntity.status(204).build();
+    public void deletarNotificacao(Integer id) {
+        if (!notificacaoRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        return ResponseEntity.status(404).build();
+        notificacaoRepository.deleteById(id);
     }
 }

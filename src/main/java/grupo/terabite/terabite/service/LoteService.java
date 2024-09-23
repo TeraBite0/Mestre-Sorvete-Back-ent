@@ -3,8 +3,9 @@ package grupo.terabite.terabite.service;
 import grupo.terabite.terabite.entity.Lote;
 import grupo.terabite.terabite.repository.LoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,40 +16,39 @@ public class LoteService {
     @Autowired
     LoteRepository loteRepository;
 
-    public ResponseEntity<List<Lote>> listarLote() {
-        List<Lote> lote = loteRepository.findAll();
-        if (lote.isEmpty()) {
-            return ResponseEntity.status(204).build();
+    public List<Lote> listarLote() {
+        List<Lote> lotes = loteRepository.findAll();
+        if (lotes.isEmpty()) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(lote);
+        return lotes;
     }
 
-    public ResponseEntity<Lote> buscarPorId(Integer id) {
-        Optional<Lote> notificacao = loteRepository.findById(id);
-        if (notificacao.isEmpty()) {
-            return ResponseEntity.status(204).build();
+    public Lote buscarPorId(Integer id) {
+        Optional<Lote> lotesOpt = loteRepository.findById(id);
+        if (lotesOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(notificacao.orElse(null));
+        return lotesOpt.get();
     }
 
-    public ResponseEntity<Lote> adicionarLote(Lote novoLote) {
+    public Lote criarLote(Lote novoLote) {
         novoLote.setId(null);
-        return ResponseEntity.status(201).body(loteRepository.save(novoLote));
+        return loteRepository.save(novoLote);
     }
 
-    public ResponseEntity<Lote> atualizarLote(Integer id, Lote lote) {
+    public Lote atualizarLote(Integer id, Lote lote) {
         if (!loteRepository.existsById(id)) {
-            return ResponseEntity.status(404).build();
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
         lote.setId(id);
-        return ResponseEntity.status(200).body(loteRepository.save(lote));
+        return loteRepository.save(lote);
     }
 
-    public ResponseEntity<Void> deletarLote(Integer id) {
-        if (loteRepository.existsById(id)) {
-            loteRepository.deleteById(id);
-            return ResponseEntity.status(204).build();
+    public void deletarLote(Integer id) {
+        if (!loteRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        return ResponseEntity.status(404).build();
+        loteRepository.deleteById(id);
     }
 }

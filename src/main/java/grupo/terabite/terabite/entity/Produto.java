@@ -1,105 +1,51 @@
 package grupo.terabite.terabite.entity;
 
-import grupo.terabite.terabite.enums.ProdutoEnum;
-import grupo.terabite.terabite.enums.SimNaoEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "PRODUTO")
-//schema = "TRB",
 public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "ID_PROD")
     private Integer id;
 
-    @Column(name = "ITEM_PROD")
-    private ProdutoEnum item;
+    @NotBlank
+    @Column(name = "NOME_PROD")
+    private String nome;
 
-    @Column(name = "MARCA_PROD")
-    private String marca;
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "FK_ID_MARCA_PROD", referencedColumnName = "ID_MARCA")
+    private Marca marca;
 
-    @Column(name = "SABOR_PROD")
-    private String sabor;
-
+    @NotBlank
     @Column(name = "PRECO_PROD")
     private Double preco;
 
-    @Column(name = "QAT_ESTOQUE_PROD")
+    @NotNull
+    @Column(name = "QDT_ESTOQUE_PROD")
     private Integer qtdEstoque;
 
+    @NotBlank
     @Column(name = "IS_ATIVO")
-    @Enumerated(EnumType.STRING)
-    private SimNaoEnum isAtivo = SimNaoEnum.S;
+    private Boolean isAtivo = true;
 
     public Produto() {
     }
 
-    public Produto(Integer id, ProdutoEnum item, String marca, String sabor, Double preco, Integer qtdEstoque, SimNaoEnum isAtivo) {
+    public Produto(Integer id, String nome, Marca marca, Double preco, Boolean isAtivo) {
         this.id = id;
-        this.item = item;
+        this.nome = nome;
         this.marca = marca;
-        this.sabor = sabor;
         this.preco = preco;
-        this.qtdEstoque = qtdEstoque;
-        this.isAtivo = isAtivo;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public ProdutoEnum getItem() {
-        return item;
-    }
-
-    public void setItem(ProdutoEnum item) {
-        this.item = item;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getSabor() {
-        return sabor;
-    }
-
-    public void setSabor(String sabor) {
-        this.sabor = sabor;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public Integer getQtdEstoque() {
-        return qtdEstoque;
-    }
-
-    public void setQtdEstoque(Integer qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-
-    public SimNaoEnum getIsAtivo() {
-        return isAtivo;
-    }
-
-    public void setIsAtivo(SimNaoEnum isAtivo) {
         this.isAtivo = isAtivo;
     }
 }

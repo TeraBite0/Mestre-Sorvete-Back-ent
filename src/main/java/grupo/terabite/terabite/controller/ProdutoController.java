@@ -5,7 +5,6 @@ import grupo.terabite.terabite.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -17,26 +16,27 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<List<Produto>> listarTodos() {
-        return service.listarProduto();
+        return ResponseEntity.ok(service.listarProduto());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Integer id) {
-        return service.buscarPorId(id);
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<Produto> adicionarProduto(@RequestBody Produto novoProduto) {
-        return service.adicionarProduto(novoProduto);
+    public ResponseEntity<Produto> criarProduto(@RequestBody Produto novoProduto) {
+        return ResponseEntity.status(201).body(service.criarProduto(novoProduto));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable Integer id, @RequestBody Produto produtoAtualizado) {
-        return service.atualizarProduto(id, produtoAtualizado);
+        return ResponseEntity.ok(service.atualizarProduto(id, produtoAtualizado));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarProduto(@PathVariable Integer id) {
-        return service.deletarProduto(id);
+    public ResponseEntity<Produto> deletarProduto(@PathVariable Integer id) {
+        service.deletarProduto(id);
+        return ResponseEntity.noContent().build();
     }
 }

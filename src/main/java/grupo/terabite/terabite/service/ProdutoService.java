@@ -3,8 +3,9 @@ package grupo.terabite.terabite.service;
 import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,40 +16,39 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public ResponseEntity<List<Produto>> listarProduto() {
+    public List<Produto> listarProduto() {
         List<Produto> produtos = produtoRepository.findAll();
         if (produtos.isEmpty()) {
-            return ResponseEntity.status(204).build();
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(produtos);
+        return produtos;
     }
 
-    public ResponseEntity<Produto> buscarPorId(Integer id) {
-        Optional<Produto> produto = produtoRepository.findById(id);
-        if (produto.isEmpty()) {
-            return ResponseEntity.status(204).build();
+    public Produto buscarPorId(Integer id) {
+        Optional<Produto> produtosOpt = produtoRepository.findById(id);
+        if (produtosOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
-        return ResponseEntity.status(200).body(produto.orElse(null));
+        return produtosOpt.get();
     }
 
-    public ResponseEntity<Produto> adicionarProduto(Produto novoProduto) {
+    public Produto criarProduto(Produto novoProduto) {
         novoProduto.setId(null);
-        return ResponseEntity.status(201).body(produtoRepository.save(novoProduto));
+        return produtoRepository.save(novoProduto);
     }
 
-    public ResponseEntity<Produto> atualizarProduto(Integer id, Produto produtoAtualizado) {
+    public Produto atualizarProduto(Integer id, Produto produtoAtualizado) {
         if (!produtoRepository.existsById(id)) {
-            return ResponseEntity.status(404).build();
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
         produtoAtualizado.setId(id);
-        return ResponseEntity.status(200).body(produtoRepository.save(produtoAtualizado));
+        return produtoRepository.save(produtoAtualizado);
     }
 
-    public ResponseEntity<Void> deletarProduto(Integer id) {
-        if (produtoRepository.existsById(id)) {
-            produtoRepository.deleteById(id);
-            return ResponseEntity.status(204).build();
+    public void deletarProduto(Integer id) {
+        if (!produtoRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        return ResponseEntity.status(404).build();
+        produtoRepository.deleteById(id);
     }
 }
