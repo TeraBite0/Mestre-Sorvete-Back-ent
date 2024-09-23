@@ -1,7 +1,7 @@
 package grupo.terabite.terabite.entity;
 
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,15 +11,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "MARCA")
-public class Marca {
+@Table(name = "PERDA")
+public class Perda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_MARCA")
+    @Column(name = "ID_PERD")
     private Integer id;
 
-    @NotBlank
-    @Column(name = "NOME_MARCA")
-    private String nome;
+    @Column(name = "QUANTIDADE_PRODUTO_PERD")
+    private Integer qtdProduto;
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ID_PROD_PERD", referencedColumnName = "ID_PROD")
+    private Produto produto;
 }

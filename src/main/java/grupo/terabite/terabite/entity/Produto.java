@@ -39,6 +39,6 @@ public class Produto {
     private Integer qtdEstoque;
 
     @NotBlank
-    @Column(name = "IS_ATIVO")
+    @Column(name = "IS_ATIVO_PROD")
     private Boolean isAtivo = true;
 }
