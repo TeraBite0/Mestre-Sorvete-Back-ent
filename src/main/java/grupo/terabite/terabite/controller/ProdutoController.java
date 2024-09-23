@@ -2,6 +2,7 @@ package grupo.terabite.terabite.controller;
 
 import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.service.ProdutoService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class ProdutoController {
     public ResponseEntity<List<Produto>> listarTodos() {
         return ResponseEntity.ok(service.listarProduto());
     }
-
+    @Operation(summary = "Busca um produto pelo ID", description = "Retorna um produto com base no seu ID")
     @GetMapping("/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Integer id) {
         return ResponseEntity.ok(service.buscarPorId(id));
