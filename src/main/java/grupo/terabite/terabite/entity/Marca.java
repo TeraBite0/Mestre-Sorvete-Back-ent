@@ -2,12 +2,15 @@ package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "MARCA")
 public class Marca {
 
@@ -18,11 +21,4 @@ public class Marca {
 
     @NotBlank
     private String nome;
-
-    public Marca(){}
-
-    public Marca(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
 }

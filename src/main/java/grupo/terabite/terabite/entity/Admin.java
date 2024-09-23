@@ -3,12 +3,15 @@ package grupo.terabite.terabite.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "ADMIN")
 public class Admin{
 
@@ -25,13 +28,4 @@ public class Admin{
     @NotBlank
     @Column(name = "SENHA_ADMIN")
     String senha;
-
-    public Admin() {
-    }
-
-    public Admin(Integer id, String email, String senha) {
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-    }
 }

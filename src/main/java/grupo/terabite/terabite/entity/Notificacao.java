@@ -3,12 +3,15 @@ package grupo.terabite.terabite.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "NOTIFICACAO")
 public class Notificacao {
 
@@ -26,10 +29,4 @@ public class Notificacao {
     @JoinColumn(name = "FK_ID_PROD_NOTI", referencedColumnName = "ID_PROD")
     @NotBlank
     private Produto produto;
-
-    public Notificacao(Integer id, String email, Produto produto) {
-        this.id = id;
-        this.email = email;
-        this.produto = produto;
-    }
 }

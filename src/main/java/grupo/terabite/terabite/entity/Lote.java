@@ -2,14 +2,17 @@ package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "LOTE")
 public class Lote {
 
@@ -37,7 +40,4 @@ public class Lote {
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROD_LOTE", referencedColumnName = "ID_PROD")
     private Produto produto;
-
-    public Lote() {
-    }
 }

@@ -3,12 +3,16 @@ package grupo.terabite.terabite.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Getter
-@Setter
 @Table(name = "PRODUTO")
 public class Produto {
 
@@ -37,15 +41,4 @@ public class Produto {
     @NotBlank
     @Column(name = "IS_ATIVO")
     private Boolean isAtivo = true;
-
-    public Produto() {
-    }
-
-    public Produto(Integer id, String nome, Marca marca, Double preco, Boolean isAtivo) {
-        this.id = id;
-        this.nome = nome;
-        this.marca = marca;
-        this.preco = preco;
-        this.isAtivo = isAtivo;
-    }
 }
