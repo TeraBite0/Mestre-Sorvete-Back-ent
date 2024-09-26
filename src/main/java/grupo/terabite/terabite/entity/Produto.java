@@ -27,6 +27,11 @@ public class Produto {
 
     @NotBlank
     @ManyToOne
+    @JoinColumn(name = "FK_ID_TIPO", referencedColumnName = "ID_TIPO")
+    private Tipo tipo;
+
+    @NotBlank
+    @ManyToOne
     @JoinColumn(name = "FK_ID_MARCA_PROD", referencedColumnName = "ID_MARCA")
     private Marca marca;
 

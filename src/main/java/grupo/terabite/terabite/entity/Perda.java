@@ -19,7 +19,7 @@ public class Perda {
     @Column(name = "ID_PERD")
     private Integer id;
 
-    @Column(name = "QUANTIDADE_PRODUTO_PERD")
+    @Column(name = "QTD_PRODUTO_PERD")
     private Integer qtdProduto;
 
     @ManyToOne

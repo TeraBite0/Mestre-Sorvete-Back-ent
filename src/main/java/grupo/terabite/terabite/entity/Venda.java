@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,5 +23,5 @@ public class Venda {
     private Integer id;
 
     @Column(name = "DATA_COMPRA_VEND")
-    private LocalDate dataCompra;
+    private LocalDateTime dataCompra;
 }
