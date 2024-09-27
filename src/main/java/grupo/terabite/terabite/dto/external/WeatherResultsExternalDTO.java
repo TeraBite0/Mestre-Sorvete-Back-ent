@@ -1,10 +1,10 @@
-package grupo.terabite.terabite.dto.externo;
+package grupo.terabite.terabite.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class WeatherResultsExternoDto {
+public class WeatherResultsExternalDTO {
 
     @JsonProperty("date")
     private String date;
@@ -31,7 +31,7 @@ public class WeatherResultsExternoDto {
     private String timezone;
 
     @JsonProperty("forecast")
-    private List<ForecastExternoDto> forecast;
+    private List<ForecastExternalDTO> forecast;
 
     // Getters e Setters
 
@@ -99,11 +99,11 @@ public class WeatherResultsExternoDto {
         this.timezone = timezone;
     }
 
-    public List<ForecastExternoDto> getForecast() {
+    public List<ForecastExternalDTO> getForecast() {
         return forecast;
     }
 
-    public void setForecast(List<ForecastExternoDto> forecast) {
+    public void setForecast(List<ForecastExternalDTO> forecast) {
         this.forecast = forecast;
     }
 }

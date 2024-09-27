@@ -1,8 +1,8 @@
-package grupo.terabite.terabite.dto.externo;
+package grupo.terabite.terabite.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ForecastExternoDto {
+public class ForecastExternalDTO {
 
     @JsonProperty("date")
     private String date;

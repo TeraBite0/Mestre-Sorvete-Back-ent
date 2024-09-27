@@ -1,8 +1,8 @@
-package grupo.terabite.terabite.dto.externo;
+package grupo.terabite.terabite.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class HgExternoDto {
+public class HgExternalDTO {
 
     @JsonProperty("by")
     private String by;
@@ -11,7 +11,7 @@ public class HgExternoDto {
     private boolean validKey;
 
     @JsonProperty("results")
-    private WeatherResultsExternoDto results;
+    private WeatherResultsExternalDTO results;
 
     @JsonProperty("execution_time")
     private float executionTime;
@@ -36,11 +36,11 @@ public class HgExternoDto {
         this.validKey = validKey;
     }
 
-    public WeatherResultsExternoDto getResults() {
+    public WeatherResultsExternalDTO getResults() {
         return results;
     }
 
-    public void setResults(WeatherResultsExternoDto results) {
+    public void setResults(WeatherResultsExternalDTO results) {
         this.results = results;
     }
 
