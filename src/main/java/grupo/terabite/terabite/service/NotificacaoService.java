@@ -24,28 +24,12 @@ public class NotificacaoService {
         return notificacoes;
     }
 
-    public Notificacao buscarPorId(Integer id) {
-        Optional<Notificacao> notificacoesOpt = notificacaoRepository.findById(id);
-        if (notificacoesOpt.isEmpty()) {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
-        }
-        return notificacoesOpt.get();
-    }
-
     public Notificacao criarNotificacao(Notificacao novaNotificacao) {
         novaNotificacao.setId(null);
         return notificacaoRepository.save(novaNotificacao);
     }
 
-    public Notificacao atualizarNotificacao(Integer id, Notificacao notificacao) {
-        if (!notificacaoRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
-        }
-        notificacao.setId(id);
-        return notificacaoRepository.save(notificacao);
-    }
-
-    public void deletarNotificacao(Integer id) {
+    public void deletarNotificacao(Integer id) { // fazer cenário para caso o produto seja desativado
         if (!notificacaoRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }

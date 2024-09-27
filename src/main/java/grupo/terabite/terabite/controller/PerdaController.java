@@ -13,11 +13,11 @@ import java.util.List;
 public class PerdaController {
 
     @Autowired
-    private PerdaService perdaService;
+    private PerdaService service;
 
     @GetMapping
     public ResponseEntity<List<Perda>> listarPerda() {
-        return ResponseEntity.ok(perdaService.listarPerda());
+        return ResponseEntity.ok(service.listarPerda());
     }
 
     @GetMapping("/{id}")

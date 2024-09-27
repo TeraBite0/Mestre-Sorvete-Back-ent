@@ -1,18 +1,18 @@
 package grupo.terabite.terabite.controller;
 
 import grupo.terabite.terabite.entity.Lote;
-import grupo.terabite.terabite.service.LoteService;
+import grupo.terabite.terabite.service.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lotes")
-public class LoteController {
+@RequestMapping("/estoque")
+public class EstoqueController {
 
     @Autowired
-    private LoteService service;
+    private EstoqueService service;
 
     @GetMapping
     public ResponseEntity<List<Lote>> listarLote() {

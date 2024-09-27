@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class MarcaServise {
+public class MarcaService {
 
     @Autowired
     private MarcaRepository marcaRepository;
@@ -24,13 +23,6 @@ public class MarcaServise {
         return marcas;
     }
 
-    public Marca buscarMarcaPorId(Integer id){
-        Optional<Marca> marcasOpt = marcaRepository.findById(id);
-        if(marcasOpt.isEmpty()){
-            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
-        }
-        return marcasOpt.get();
-    }
 
     public Marca criarMarca(Marca novaMarca){
         novaMarca.setId(null);

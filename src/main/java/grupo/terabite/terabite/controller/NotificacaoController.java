@@ -20,24 +20,8 @@ public class NotificacaoController {
         return ResponseEntity.ok(service.listarNotificacoes());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Notificacao> buscarPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
-    }
-
     @PostMapping
     public ResponseEntity<Notificacao> criarNotificacao(@RequestBody Notificacao novaNotificacao) {
         return ResponseEntity.ok(service.criarNotificacao(novaNotificacao));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Notificacao> atualizarNotificacao(@PathVariable Integer id, @RequestBody Notificacao notificacaoAtualizada) {
-        return ResponseEntity.ok(service.atualizarNotificacao(id, notificacaoAtualizada));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Notificacao> deletarNotificacao(@PathVariable Integer id) {
-        service.deletarNotificacao(id);
-        return ResponseEntity.noContent().build();
     }
 }

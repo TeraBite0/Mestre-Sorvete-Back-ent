@@ -44,11 +44,4 @@ public class ProdutoService {
         produtoAtualizado.setId(id);
         return produtoRepository.save(produtoAtualizado);
     }
-
-    public void deletarProduto(Integer id) {
-        if (!produtoRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
-        }
-        produtoRepository.deleteById(id);
-    }
 }
