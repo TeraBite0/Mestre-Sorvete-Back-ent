@@ -1,14 +1,14 @@
 package grupo.terabite.terabite.dto.response;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
-public class VendaResponseDTO {
+public class MarcaResponseDTO {
 
     private Integer id;
-    private LocalDateTime dataCompra;
+    @NotBlank
+    private String nome;
 }

@@ -1,29 +1,35 @@
 package grupo.terabite.terabite.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import grupo.terabite.terabite.entity.Marca;
 import grupo.terabite.terabite.entity.Tipo;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class ProdutoResponseDTO {
 
-    @JsonProperty("id")
     private Integer id;
-
-    @JsonProperty("nome")
+    @NotBlank
     private String nome;
 
-    @JsonProperty("tipo")
+    @NotBlank
     private Tipo tipo;
 
-    @JsonProperty("marca")
+    @NotBlank
     private Marca marca;
 
-    @JsonProperty("preco")
+    @NotBlank
     private Double preco;
 
-    @JsonProperty("img")
-    private String img;
+    @NotNull
+    private Integer qtdEstoque;
 
-    @JsonProperty("ativo")
-    private Boolean ativo;
+    @NotBlank
+    private Boolean isAtivo = true;
 }

@@ -21,29 +21,23 @@ public class Produto {
     @Column(name = "ID_PROD")
     private Integer id;
 
-    @NotBlank
     @Column(name = "NOME_PROD")
     private String nome;
 
-    @NotBlank
     @ManyToOne
     @JoinColumn(name = "FK_ID_TIPO", referencedColumnName = "ID_TIPO")
     private Tipo tipo;
 
-    @NotBlank
     @ManyToOne
     @JoinColumn(name = "FK_ID_MARCA_PROD", referencedColumnName = "ID_MARCA")
     private Marca marca;
 
-    @NotBlank
     @Column(name = "PRECO_PROD")
     private Double preco;
 
-    @NotNull
     @Column(name = "QDT_ESTOQUE_PROD")
     private Integer qtdEstoque;
 
-    @NotBlank
     @Column(name = "IS_ATIVO_PROD")
     private Boolean isAtivo = true;
 }

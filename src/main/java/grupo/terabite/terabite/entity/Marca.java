@@ -1,7 +1,6 @@
 package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,6 @@ public class Marca {
     @Column(name = "ID_MARCA")
     private Integer id;
 
-    @NotBlank
     @Column(name = "NOME_MARCA")
     private String nome;
 }

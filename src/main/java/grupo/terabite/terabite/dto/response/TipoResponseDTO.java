@@ -3,12 +3,10 @@ package grupo.terabite.terabite.dto.response;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
-public class VendaResponseDTO {
+public class TipoResponseDTO {
 
     private Integer id;
-    private LocalDateTime dataCompra;
+    private String nome;
 }

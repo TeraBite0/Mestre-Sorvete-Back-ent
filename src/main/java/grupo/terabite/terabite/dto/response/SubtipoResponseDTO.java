@@ -1,14 +1,14 @@
 package grupo.terabite.terabite.dto.response;
 
+import grupo.terabite.terabite.entity.Tipo;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
-public class VendaResponseDTO {
+public class SubtipoResponseDTO {
 
     private Integer id;
-    private LocalDateTime dataCompra;
+    private Tipo tipoPai;
+    private Tipo tipoFilho;
 }

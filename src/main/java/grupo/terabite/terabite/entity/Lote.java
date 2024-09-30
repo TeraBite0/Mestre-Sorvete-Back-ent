@@ -1,7 +1,6 @@
 package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,6 @@ public class Lote {
     private Integer id;
 
     @Column(name = "DATA_PEDIDO_LOTE")
-    @NotNull
     private LocalDate dtPedido;
 
     @Column(name = "DATA_ENTREGA_LOTE")
