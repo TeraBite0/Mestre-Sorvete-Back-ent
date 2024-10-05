@@ -9,6 +9,6 @@ import lombok.Data;
 public class PerdaResponseDTO {
 
     private Integer id;
+    private ProdutoResponseDTO produto;
     private Integer qtdProduto;
-    private Produto produto;
 }

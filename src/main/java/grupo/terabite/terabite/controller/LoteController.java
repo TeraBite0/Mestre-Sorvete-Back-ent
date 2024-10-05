@@ -1,7 +1,7 @@
 package grupo.terabite.terabite.controller;
 
 import grupo.terabite.terabite.entity.Lote;
-import grupo.terabite.terabite.service.EstoqueService;
+import grupo.terabite.terabite.service.LoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estoque")
-public class EstoqueController {
+public class LoteController {
 
     @Autowired
-    private EstoqueService service;
+    private LoteService service;
 
     @GetMapping
     public ResponseEntity<List<Lote>> listarLote() {

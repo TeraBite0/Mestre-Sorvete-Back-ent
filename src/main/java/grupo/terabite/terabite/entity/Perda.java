@@ -2,14 +2,14 @@ package grupo.terabite.terabite.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "PERDA")
 public class Perda {
@@ -22,7 +22,11 @@ public class Perda {
     @Column(name = "QTD_PRODUTO_PERD")
     private Integer qtdProduto;
 
+    @Column(name = "DT_PERDA_PERD")
+    private LocalDate dataPerda;
+
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROD_PERD", referencedColumnName = "ID_PROD")
     private Produto produto;
+
 }

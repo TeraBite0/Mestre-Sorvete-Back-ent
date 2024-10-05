@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MarcaRepository extends JpaRepository<Marca, Integer> {
+
+    Marca findByNomeIgnoreCase(String nomeMarca);
 }

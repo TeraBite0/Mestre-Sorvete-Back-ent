@@ -10,6 +10,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.stream.DoubleStream;
+
 @Data
 @Builder
 public class ProdutoResponseDTO {
@@ -19,12 +21,6 @@ public class ProdutoResponseDTO {
     private String nome;
 
     @NotBlank
-    private Tipo tipo;
-
-    @NotBlank
-    private Marca marca;
-
-    @NotBlank
     private Double preco;
 
     @NotNull
@@ -32,4 +28,10 @@ public class ProdutoResponseDTO {
 
     @NotBlank
     private Boolean isAtivo = true;
+
+    @NotBlank
+    private TipoResponseDTO tipo;
+
+    @NotBlank
+    private MarcaResponseDTO marca;
 }

@@ -1,26 +1,23 @@
 package grupo.terabite.terabite.dto.update;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import grupo.terabite.terabite.entity.Marca;
-import grupo.terabite.terabite.entity.Tipo;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class ProdutoUpdateDTO {
-    @JsonProperty("nome")
+
+    @NotBlank
     private String nome;
 
-    @JsonProperty("tipo")
-    private Tipo tipo;
-
-
-    @JsonProperty("marca")
-    private Marca marca;
-
-    @JsonProperty("preco")
+    @NotBlank
     private Double preco;
 
-    @JsonProperty("img")
-    private String img;
+    @NotNull
+    private Integer qtdEstoque;
 
-    @JsonProperty("ativo")
-    private Boolean ativo;
+    @NotBlank
+    private Boolean isAtivo;
 }

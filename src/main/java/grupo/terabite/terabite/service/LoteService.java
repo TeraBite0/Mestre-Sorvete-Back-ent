@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EstoqueService {
+public class LoteService {
 
     @Autowired
     LoteRepository loteRepository;

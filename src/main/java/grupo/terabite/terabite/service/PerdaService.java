@@ -1,7 +1,10 @@
 package grupo.terabite.terabite.service;
 
 import grupo.terabite.terabite.entity.Perda;
+import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.repository.PerdaRepository;
+import grupo.terabite.terabite.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -11,10 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PerdaService {
 
-    @Autowired
-    private PerdaRepository perdaRepository;
+    private final PerdaRepository perdaRepository;
+    private final ProdutoService  produtoService;
 
     public List<Perda> listarPerda(){
         List<Perda> perdas = perdaRepository.findAll();
@@ -32,8 +36,8 @@ public class PerdaService {
         return perdasOpt.get();
     }
 
-    public Perda criarPerda(Perda novaPerda){
-        novaPerda.setId(null);
+    public Perda criarPerda(Perda novaPerda, String nome){
+        novaPerda.setProduto(produtoService.buscarPorNomeProduto(nome));
         return perdaRepository.save(novaPerda);
     }
 

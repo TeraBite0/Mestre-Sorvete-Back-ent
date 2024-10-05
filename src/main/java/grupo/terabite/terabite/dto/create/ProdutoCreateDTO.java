@@ -11,15 +11,14 @@ import lombok.Data;
 @Builder
 public class ProdutoCreateDTO {
 
-    private Integer id;
     @NotBlank
     private String nome;
 
     @NotBlank
-    private Tipo tipo;
+    private String nomeTipo;
 
     @NotBlank
-    private Marca marca;
+    private String nomeMarca;
 
     @NotBlank
     private Double preco;
@@ -28,5 +27,5 @@ public class ProdutoCreateDTO {
     private Integer qtdEstoque;
 
     @NotBlank
-    private Boolean isAtivo = true;
+    private Boolean isAtivo;
 }

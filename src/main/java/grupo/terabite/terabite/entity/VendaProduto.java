@@ -25,4 +25,7 @@ public class VendaProduto {
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROD_VENP", referencedColumnName = "ID_PROD")
     private Produto produto;
+
+    @Column(name = "QTD_PRODUTOS_VENDIDO")
+    private Integer qtdProdutosVendido;
 }

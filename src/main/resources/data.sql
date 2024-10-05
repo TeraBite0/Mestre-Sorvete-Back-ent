@@ -134,3 +134,11 @@ VALUES  ('Nescolak', 10.00, 35, 1, 1, 'true'),
         ('Açaí Grande', 50.00, 50, 6, 1, 'true'),
         ('Açaí com ninho', 50.00, 33, 6, 1, 'true'),
         ('Açaí com nutela', 50.00, 47, 6, 1, 'true');
+
+INSERT INTO PERDA
+        (FK_ID_PROD_PERD, DT_PERDA_PERD, QTD_PRODUTO_PERD)
+VALUES  (2, '2024-10-05', 2),
+        (5, '2024-09-15', 1),
+        (6, '2024-05-13', 5),
+        (9, '2024-07-26', 4),
+        (30, '2024-06-30', 2);
