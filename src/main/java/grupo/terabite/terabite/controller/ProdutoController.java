@@ -22,8 +22,12 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
 
-    @GetMapping
     @Operation(summary = "Lista todos produtos", description = "Retorna uma lista com todos os produtos")
+    @GetMapping
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operação bem-sucedida, produtos listadps"),
+            @ApiResponse(responseCode = "204", description = "Operação bem-sucedida, sem produtos"),
+    })
     public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
         List<Produto> produtos = service.listarProduto();
         if(produtos.isEmpty()) return ResponseEntity.noContent().build();
@@ -41,7 +45,7 @@ public class ProdutoController {
         return ResponseEntity.ok(ProdutoMapper.toDetalhe(service.buscarPorId(id)));
     }
 
-    @GetMapping("/nomeProduto")
+    @GetMapping("/nome-produto")
     @Operation(summary = "Busca produtos, com um filtro opcional", description = "Retorna todos os produtos, ou retorna produtos conforme nome e/ou marca passados. Parâmetros: nomeProduto (Opcional), nomeMarca (Opcional)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operação bem-sucedida, produtos retornados"),
@@ -54,12 +58,15 @@ public class ProdutoController {
         return null;
     }
 
+    @Operation(summary = "Cria um produto", description = "Retorna o produto criado caso sucesso na criação")
     @PostMapping
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Operação bem-sucedida, produto criado"),
-            @ApiResponse(responseCode = "404", description = "Nenhum produto encontrado"),
+            @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado"),
+            @ApiResponse(responseCode = "409", description = "Produto duplicado"),
+
     })
-    @Operation(summary = "Cria um produto", description = "Retorna o produto criado caso sucesso na criação")
     public ResponseEntity<ProdutoResponseDTO> criar(
             @RequestBody @Valid ProdutoCreateDTO produtoCreateDTO) {
         return ResponseEntity.created(null).body(
@@ -70,13 +77,15 @@ public class ProdutoController {
                                 produtoCreateDTO.getNomeTipo())));
     }
 
+    @Operation(summary = "Atualiza um produto", description = "Retorna o produto atualizado caso sucesso na criação")
     @PutMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Operação bem-sucedida, produto criado"),
+            @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos"),
+            @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Nenhum produto encontrado"),
             @ApiResponse(responseCode = "409", description = "Produto duplicado"),
     })
-    @Operation(summary = "Atualiza um produto", description = "Retorna o produto atualizado caso sucesso na criação")
     public ResponseEntity<ProdutoResponseDTO> atualizarProduto(
             @PathVariable Integer id,
             @RequestBody @Valid ProdutoUpdateDTO produtoUpdateDTO) {
