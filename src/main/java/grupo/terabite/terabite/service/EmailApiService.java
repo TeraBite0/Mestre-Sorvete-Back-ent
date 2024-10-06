@@ -1,11 +1,14 @@
 package grupo.terabite.terabite.service;
 
+import grupo.terabite.terabite.entity.Notificacao;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.mail.*;
@@ -17,6 +20,23 @@ public class EmailApiService {
     final Properties props;
 
     final Session session;
+
+    public void enviarAlertaDeProdutos(List<Notificacao> notificacoes){
+        montarEmailsDeAlerta(notificacoes);
+    }
+
+    private void montarEmailsDeAlerta(List<Notificacao> notificacoes){
+        if(notificacoes.isEmpty()) return;
+
+        Notificacao n = notificacoes.get(notificacoes.size() - 1);
+        String destinatario = n.getEmail();
+        String assunto = String.format("Produto %s disponível!", n.getProduto().getNome());
+        String body = "";
+
+        enviarEmail(destinatario, assunto, body);
+        notificacoes.remove(notificacoes.size() - 1);
+        montarEmailsDeAlerta(notificacoes);
+    }
 
     public EmailApiService() {
         Properties properties = new Properties();
@@ -111,12 +131,13 @@ public class EmailApiService {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // Teste de emails
         String seuEmail = "";
-        if(seuEmail.equals("")){
+        if(seuEmail.isBlank()){
             Scanner sc = new Scanner(System.in);
             System.out.println("Digite o email do destinatário:");
             seuEmail = sc.nextLine();
+            sc.close();
         }
 
         EmailApiService service = new EmailApiService();
