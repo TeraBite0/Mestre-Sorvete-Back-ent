@@ -6,6 +6,7 @@ import grupo.terabite.terabite.dto.response.ProdutoResponseDTO;
 import grupo.terabite.terabite.dto.update.ProdutoUpdateDTO;
 import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.service.ProdutoService;
+import grupo.terabite.terabite.service.RecomendacaoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -20,7 +22,9 @@ import java.util.List;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoService service;
+    private ProdutoService produtoService;
+    @Autowired
+    private RecomendacaoService recomendacaoService;
 
     @Operation(summary = "Lista todos produtos", description = "Retorna uma lista com todos os produtos")
     @GetMapping
@@ -29,8 +33,8 @@ public class ProdutoController {
             @ApiResponse(responseCode = "204", description = "Operação bem-sucedida, sem produtos"),
     })
     public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
-        List<Produto> produtos = service.listarProduto();
-        if(produtos.isEmpty()) return ResponseEntity.noContent().build();
+        List<Produto> produtos = produtoService.listarProduto();
+        if (produtos.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok(produtos.stream().map(ProdutoMapper::toDetalhe).toList());
     }
 
@@ -42,7 +46,7 @@ public class ProdutoController {
             @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos")
     })
     public ResponseEntity<ProdutoResponseDTO> buscarPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(ProdutoMapper.toDetalhe(service.buscarPorId(id)));
+        return ResponseEntity.ok(ProdutoMapper.toDetalhe(produtoService.buscarPorId(id)));
     }
 
     @GetMapping("/nome-produto")
@@ -53,8 +57,8 @@ public class ProdutoController {
             @ApiResponse(responseCode = "404", description = "Nenhum produto encontrado"),
             @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos")
     })
-    public ResponseEntity<List<Produto>> listarComFiltro( @RequestParam(required = false) String nomeProduto,
-                                                          @RequestParam(required = false) String nomeMarca){
+    public ResponseEntity<List<Produto>> listarComFiltro(@RequestParam(required = false) String nomeProduto,
+                                                         @RequestParam(required = false) String nomeMarca) {
         return null;
     }
 
@@ -71,7 +75,7 @@ public class ProdutoController {
             @RequestBody @Valid ProdutoCreateDTO produtoCreateDTO) {
         return ResponseEntity.created(null).body(
                 ProdutoMapper.toDetalhe(
-                        service.criarProduto(
+                        produtoService.criarProduto(
                                 ProdutoMapper.toCriarProduto(produtoCreateDTO),
                                 produtoCreateDTO.getNomeMarca(),
                                 produtoCreateDTO.getNomeTipo())));
@@ -91,7 +95,17 @@ public class ProdutoController {
             @RequestBody @Valid ProdutoUpdateDTO produtoUpdateDTO) {
         return ResponseEntity.status(201).body(
                 ProdutoMapper.toDetalhe(
-                        service.atualizarProduto(id,
+                        produtoService.atualizarProduto(id,
                                 ProdutoMapper.toAtualizar(produtoUpdateDTO))));
+    }
+
+    @Operation(summary = "Busca a recomendação do dia atual", description = "Retorna o produto aleatório que representa a recomendação do dia")
+    @GetMapping("/recomendacao-do-dia")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Retorna o produto que é a recomendação do dia"),
+            @ApiResponse(responseCode = "204", description = "Operação sucedida, nenhum produto cadastrado")
+    })
+    public ResponseEntity<ProdutoResponseDTO> recomendacaoDoDia() {
+        return ResponseEntity.ok(ProdutoMapper.toDetalhe(recomendacaoService.recomendacaoDoDia()));
     }
 }

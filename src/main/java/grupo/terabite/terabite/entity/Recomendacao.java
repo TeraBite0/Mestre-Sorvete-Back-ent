@@ -1,10 +1,7 @@
 package grupo.terabite.terabite.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -26,4 +23,9 @@ public class Recomendacao {
 
     @Column(name = "DATA_RECO")
     private LocalDate dtRecomendacao;
+
+    public Recomendacao(Produto produto, LocalDate dtRecomendacao) {
+        this.produto = produto;
+        this.dtRecomendacao = dtRecomendacao;
+    }
 }
