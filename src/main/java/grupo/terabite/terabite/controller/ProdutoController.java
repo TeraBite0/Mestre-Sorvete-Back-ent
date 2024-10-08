@@ -31,6 +31,7 @@ public class ProdutoController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operação bem-sucedida, produtos listadps"),
             @ApiResponse(responseCode = "204", description = "Operação bem-sucedida, sem produtos"),
+            @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado"),
     })
     public ResponseEntity<List<ProdutoResponseDTO>> listarTodos() {
         List<Produto> produtos = produtoService.listarProduto();
@@ -42,6 +43,7 @@ public class ProdutoController {
     @GetMapping("/{id}")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Operação bem-sucedida, produto retornado"),
+            @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado"),
             @ApiResponse(responseCode = "404", description = "Nenhum produto encontrado"),
             @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos")
     })
@@ -55,6 +57,7 @@ public class ProdutoController {
             @ApiResponse(responseCode = "200", description = "Operação bem-sucedida, produtos retornados"),
             @ApiResponse(responseCode = "204", description = "Operação bem-sucedida, sem produtos"),
             @ApiResponse(responseCode = "404", description = "Nenhum produto encontrado"),
+            @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado"),
             @ApiResponse(responseCode = "400", description = "Erro de requisição, parâmetros inválidos")
     })
     public ResponseEntity<List<Produto>> listarComFiltro(@RequestParam(required = false) String nomeProduto,
