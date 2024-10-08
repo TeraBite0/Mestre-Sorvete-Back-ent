@@ -1,7 +1,5 @@
 package grupo.terabite.terabite.dto.create;
 
-import grupo.terabite.terabite.entity.Marca;
-import grupo.terabite.terabite.entity.Tipo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

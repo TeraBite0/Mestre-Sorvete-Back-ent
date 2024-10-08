@@ -2,7 +2,6 @@ package grupo.terabite.terabite.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import grupo.terabite.terabite.entity.Produto;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

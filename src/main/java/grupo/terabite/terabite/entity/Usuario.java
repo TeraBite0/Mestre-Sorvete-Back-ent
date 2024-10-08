@@ -8,17 +8,18 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "ADMIN")
-public class Admin{
+@Table(name = "USUARIO")
+
+public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID_ADMIN")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_USUARIO")
     private Integer id;
 
-    @Column(name = "EMAIL_ADMIN")
+    @Column(name = "EMAIL_USUARIO")
     private String email;
 
-    @Column(name = "SENHA_ADMIN")
+    @Column(name = "SENHA_USUARIO")
     private String senha;
 }

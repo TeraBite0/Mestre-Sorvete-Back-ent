@@ -142,3 +142,7 @@ VALUES  (2, '2024-10-05', 2),
         (6, '2024-05-13', 5),
         (9, '2024-07-26', 4),
         (30, '2024-06-30', 2);
+
+INSERT INTO USUARIO
+        (EMAIL_USUARIO, SENHA_USUARIO)
+VALUES ('josue@gmail.com', '$2a$10$0/TKTGxdREbWaWjWYhwf6e9P1fPOAMMNqEnZgOG95jnSkHSfkkIrC');

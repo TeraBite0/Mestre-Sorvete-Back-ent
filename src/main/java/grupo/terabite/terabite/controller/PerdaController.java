@@ -1,9 +1,7 @@
 package grupo.terabite.terabite.controller;
 
 import grupo.terabite.terabite.dto.create.PerdaCreateDTO;
-import grupo.terabite.terabite.dto.create.ProdutoCreateDTO;
 import grupo.terabite.terabite.dto.mapper.PerdaMapper;
-import grupo.terabite.terabite.dto.mapper.ProdutoMapper;
 import grupo.terabite.terabite.dto.response.PerdaResponseDTO;
 import grupo.terabite.terabite.entity.Perda;
 import grupo.terabite.terabite.service.PerdaService;

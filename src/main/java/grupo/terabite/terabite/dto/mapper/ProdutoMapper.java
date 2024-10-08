@@ -9,8 +9,6 @@ import grupo.terabite.terabite.entity.Marca;
 import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.entity.Tipo;
 
-import java.util.stream.DoubleStream;
-
 public class ProdutoMapper {
 
     public static ProdutoResponseDTO toDetalhe(Produto produto){

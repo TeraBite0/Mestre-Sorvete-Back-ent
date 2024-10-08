@@ -1,6 +1,5 @@
 package grupo.terabite.terabite.service;
 
-import grupo.terabite.terabite.entity.Marca;
 import grupo.terabite.terabite.entity.Produto;
 import grupo.terabite.terabite.entity.Recomendacao;
 import grupo.terabite.terabite.repository.ProdutoRepository;

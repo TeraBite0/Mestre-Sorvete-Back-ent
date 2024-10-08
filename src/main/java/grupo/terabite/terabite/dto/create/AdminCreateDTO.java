@@ -1,4 +1,4 @@
-package grupo.terabite.terabite.dto.response;
+package grupo.terabite.terabite.dto.create;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -9,9 +9,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AdminResponseDTO {
+public class AdminCreateDTO {
 
-    private Integer id;
     @NotBlank
     @Email
     @Schema(description = "Email do usuário")
