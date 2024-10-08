@@ -17,7 +17,7 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     public List<Venda> listarVenda(){
-        List<Venda> vendas = vendaRepository.findAll();
+        List<Venda> vendas = vendaRepository.findAllByOrderByDtVendaDesc();
         if(vendas.isEmpty()){
             throw new ResponseStatusException(HttpStatusCode.valueOf(204));
         }
