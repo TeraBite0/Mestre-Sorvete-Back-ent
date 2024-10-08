@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TerabiteApplication {
+public class TeraBiteApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TerabiteApplication.class, args);
+		SpringApplication.run(TeraBiteApplication.class, args);
 	}
 
 }
