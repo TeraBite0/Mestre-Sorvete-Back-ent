@@ -19,6 +19,21 @@ public class RecomendacaoService {
     @Autowired
     RecomendacaoRepository recomendacaoRepository;
 
+    public Produto alterarRecomendacaoDoDia(Produto produtoNovo){
+        produtoNovo = produtoService.buscarPorId(produtoNovo.getId()); // valida se o produto é inexistente por id
+        LocalDate hoje = LocalDate.now();
+        Recomendacao recomendacaoDoDia = recomendacaoRepository.findByDtRecomendacao(hoje);
+
+        if(recomendacaoDoDia == null){ // valida se a recomendacao atual não foi gerada ainda
+            recomendacaoDoDia = new Recomendacao();
+            recomendacaoDoDia.setDtRecomendacao(hoje);
+        }
+
+        recomendacaoDoDia.setProduto(produtoNovo);
+        recomendacaoRepository.save(recomendacaoDoDia);
+        return recomendacaoDoDia.getProduto();
+    }
+
     public Produto recomendacaoDoDia() {
         LocalDate hoje = LocalDate.now();
         Recomendacao recomendacaoDoDia = recomendacaoRepository.findByDtRecomendacao(hoje);
