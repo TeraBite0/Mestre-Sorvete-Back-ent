@@ -34,19 +34,22 @@ public class RecomendacaoService {
     }
 
     private Produto gerarRecomendacaoDoDia(List<Recomendacao> recomendacoes) {
-        if (recomendacoes.isEmpty()) {
-            return produtoAleatorio();
+        List<Produto> produtos = produtoService.listarProduto();
+
+        if (recomendacoes.isEmpty() || produtos.size() >= recomendacoes.size()) {
+            return produtoAleatorio(produtos);
         } else {
-            Boolean produtoNovo;
+            boolean produtoNovo;
             Produto produtoGerado;
 
             do {
                 produtoNovo = true;
-                produtoGerado = produtoAleatorio();
+                produtoGerado = produtoAleatorio(produtos);
 
                 for (Recomendacao r : recomendacoes) {
-                    if (r.getProduto().getId().equals(produtoGerado.getId())) {
+                    if (r.getProduto().getId().equals(produtoGerado.getId()) && !produtoGerado.getIsAtivo()) {
                         produtoNovo = false;
+                        break;
                     }
                 }
             }
@@ -56,10 +59,8 @@ public class RecomendacaoService {
         }
     }
 
-    private Produto produtoAleatorio() {
-        List<Produto> produtos = produtoService.listarProduto();
+    private Produto produtoAleatorio(List<Produto> produtos) {
         Double n = (Math.random() * produtos.size());
-
         return produtos.get(n.intValue());
     }
 
