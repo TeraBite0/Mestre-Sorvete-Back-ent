@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RecomendacaoService {
@@ -28,13 +29,13 @@ public class RecomendacaoService {
             produtoDoDia = gerarRecomendacaoDoDia(recomendacoes);
             recomendacaoDoDia = new Recomendacao(produtoDoDia, hoje);
             recomendacaoRepository.save(recomendacaoDoDia);
-            excluirDadosAntigos(recomendacoes);
+            excluirDadosAntigos();
         }
         return recomendacaoDoDia.getProduto();
     }
 
     private Produto gerarRecomendacaoDoDia(List<Recomendacao> recomendacoes) {
-        List<Produto> produtos = produtoService.listarProduto();
+        List<Produto> produtos = produtoService.listarProduto().stream().filter(Produto::getIsAtivo).collect(Collectors.toList());
 
         if (recomendacoes.isEmpty() || produtos.size() >= recomendacoes.size()) {
             return produtoAleatorio(produtos);
@@ -47,7 +48,7 @@ public class RecomendacaoService {
                 produtoGerado = produtoAleatorio(produtos);
 
                 for (Recomendacao r : recomendacoes) {
-                    if (r.getProduto().getId().equals(produtoGerado.getId()) && !produtoGerado.getIsAtivo()) {
+                    if (r.getProduto().getId().equals(produtoGerado.getId())) {
                         produtoNovo = false;
                         break;
                     }
@@ -64,12 +65,11 @@ public class RecomendacaoService {
         return produtos.get(n.intValue());
     }
 
-    private void excluirDadosAntigos(List<Recomendacao> recomendacoes){
-        LocalDate hoje = LocalDate.now();
+    private void excluirDadosAntigos(){
+        LocalDate dtLimite = LocalDate.now().minusDays(7); // <- qtd de dias que definem uma recomendação antida
+        List<Recomendacao> recomendacoes = recomendacaoRepository.findByDtRecomendacaoBefore(dtLimite);
         for(Recomendacao r: recomendacoes){
-            if(r.getDtRecomendacao().isBefore(hoje.minusDays(7))){
-                recomendacaoRepository.deleteById(r.getId());
-            }
+            recomendacaoRepository.deleteById(r.getId());
         }
     }
 }
