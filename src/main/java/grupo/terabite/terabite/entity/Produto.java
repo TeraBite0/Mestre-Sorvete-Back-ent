@@ -22,7 +22,7 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_TIPO", referencedColumnName = "ID_TIPO")
-    private Tipo tipo;
+    private Subtipo subtipo;
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_MARCA_PROD", referencedColumnName = "ID_MARCA")
@@ -30,9 +30,6 @@ public class Produto {
 
     @Column(name = "PRECO_PROD")
     private Double preco;
-
-    @Column(name = "QDT_ESTOQUE_PROD")
-    private Integer qtdEstoque;
 
     @Column(name = "IS_ATIVO_PROD")
     private Boolean isAtivo = true;

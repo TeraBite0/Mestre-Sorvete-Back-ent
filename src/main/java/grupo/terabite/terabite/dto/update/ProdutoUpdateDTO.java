@@ -15,9 +15,6 @@ public class ProdutoUpdateDTO {
     @NotBlank
     private Double preco;
 
-    @NotNull
-    private Integer qtdEstoque;
-
     @NotBlank
     private Boolean isAtivo;
 }

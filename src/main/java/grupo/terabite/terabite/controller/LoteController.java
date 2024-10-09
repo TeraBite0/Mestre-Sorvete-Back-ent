@@ -1,5 +1,7 @@
 package grupo.terabite.terabite.controller;
 
+import grupo.terabite.terabite.dto.mapper.EstoqueProdutoMapper;
+import grupo.terabite.terabite.dto.response.EstoqueProdutoResponseDTO;
 import grupo.terabite.terabite.entity.Lote;
 import grupo.terabite.terabite.service.LoteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,15 +19,15 @@ public class LoteController {
     @Autowired
     private LoteService service;
 
-    @Operation(summary = "Lista todos os lotes registrados", description = "Retorna todos os lotes registrados")
+    @Operation(summary = "Lista todos produtos com informações de estoque", description = "Retorna todos os produtos com lotes registrados")
     @GetMapping
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Operação bem-sucedida,Lote atualizado com sucesso"),
-            @ApiResponse(responseCode = "201", description = "Operação bem-sucedida, sem lotes"),
+            @ApiResponse(responseCode = "200", description = "Operação bem-sucedida,Estoque listado com sucesso"),
+            @ApiResponse(responseCode = "204", description = "Operação bem-sucedida, sem produtos"),
             @ApiResponse(responseCode = "401", description = "Erro de requisição, Não autorizado")
     })
-    public ResponseEntity<List<Lote>> listarLote() {
-        return ResponseEntity.ok(service.listarLote());
+    public ResponseEntity<List<EstoqueProdutoResponseDTO>> listarEstoque() {
+        return ResponseEntity.ok(service.estoque().stream().map(EstoqueProdutoMapper::toResponseDTO).toList());
     }
 
     @Operation(summary = "Busca um lote pelo ID", description = "Retorna um lote com base no seu ID")
@@ -36,7 +38,8 @@ public class LoteController {
             @ApiResponse(responseCode = "404", description = "Nenhum lote não encontrado")
     })
     public ResponseEntity<Lote> buscarPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
+        // return ResponseEntity.ok(service.buscarPorId(id));
+        return null;
     }
 
     @Operation(summary = "Registra um lote", description = "Retorna o lote registrado")

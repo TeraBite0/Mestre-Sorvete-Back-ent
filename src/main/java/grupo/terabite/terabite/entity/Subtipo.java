@@ -22,7 +22,6 @@ public class Subtipo {
     @JoinColumn(name = "FK_ID_TIPO_PAI", referencedColumnName = "ID_TIPO")
     private Tipo tipoPai;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_ID_TIPO_FILHO", referencedColumnName = "ID_TIPO")
-    private Tipo tipoFilho;
+    @Column(name = "NOME_SUBT")
+    private String nome;
 }

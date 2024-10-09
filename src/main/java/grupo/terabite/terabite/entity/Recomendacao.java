@@ -17,7 +17,7 @@ public class Recomendacao {
     @Column(name = "ID_RECO")
     private Integer id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "FK_ID_PROD_RECO",referencedColumnName = "ID_PROD")
     private Produto produto;
 

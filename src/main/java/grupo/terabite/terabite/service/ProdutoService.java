@@ -41,7 +41,7 @@ public class ProdutoService {
 
     public Produto criarProduto(Produto produto, String nomeMarca, String nomeTipo) {
         produto.setMarca(marcaService.buscarPorNomeMarca(nomeMarca));
-        produto.setTipo(tipoRepository.buscarPorNomeTipo(nomeTipo));
+        // produto.setSubtipo((tipoRepository.buscarPorNomeTipo(nomeTipo))); CONSERTAR
         return produtoRepository.save(produto);
     }
 
